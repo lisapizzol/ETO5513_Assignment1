@@ -13,12 +13,30 @@ library(knitr)
 library(tidyverse)
 library(readr)
 library(kableExtra)
+
+# read in data 
+temperature_anomaly <- read_csv("Data/temperature-anomaly.csv")
 ```
 
 
 # Research question 
 This assignment will explore the question: 
 
-<div align = 'center'>**How have global average temperatures changed overtime?** 
+<div align = 'center'>
+**How have global average temperatures changed overtime?** </div>
 
-<div align = 'left'> It will specifically look at data for global average temperatures relative to the average temperature for the period between 1961 and 1990. 
+It will specifically look at data for global average temperatures relative to the average temperature for the period between 1961 and 1990. 
+
+# Data set Introduction
+The data used in this assignment is from Ritchie etal., 2020, and can be found at [Our World in Data](https://ourworldindata.org/co2-and-greenhouse-gas-emissions). It contains global average temperatures relative to the average temperature for the time period between 1961 and 1990, for the Entire Globe; the Southern Hemisphere; and the Northern Hemisphere, from 1850 to 2023. 
+
+The variables contained in this data set are shown below in Table 2.1 - Variable Names. The variable Entity contains categorical information of either Global, Northern Hemisphere or Southern Hemisphere, meanwhile the variable year contains values from 1850 to 2023. All other variables are described in Table 2.1. 
+```{r}
+# table of variable names
+kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names') %>%
+  kable_styling()
+```
+
+
+# References
+Ritchie, H., Roser, M., &amp; Rosado, P. (2020, May 11). CO₂ and greenhouse gas emissions. Our World in Data. https://ourworldindata.org/co2-and-greenhouse-gas-emissions 
