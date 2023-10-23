@@ -1,0 +1,19 @@
+---
+title: "Assignment 1 - Project Proposal"
+author: "Lisa Pizzol"
+output:
+  bookdown::html_document2
+---
+
+```{r Section 1, message=FALSE, warning=FALSE, include=FALSE}
+# Section 1: Loading Libraries
+library(rmarkdown)
+library(bookdown)
+library(knitr)
+library(tidyverse)
+library(readr)
+library(kableExtra)
+```
+
+
+
