@@ -6,7 +6,7 @@ output:
 ---
 
 ```{r Section 1, message=FALSE, warning=FALSE, include=FALSE}
-# Section 1: Loading Libraries
+# Section 1 -  Loading Libraries
 library(rmarkdown)
 library(bookdown)
 library(knitr)
@@ -16,4 +16,9 @@ library(kableExtra)
 ```
 
 
+# Research question 
+This assignment will explore the question: 
 
+<div align = 'center'>**How have global average temperatures changed overtime?** 
+
+<div align = 'left'> It will specifically look at data for global average temperatures relative to the average temperature for the period between 1961 and 1990. 
