@@ -643,9 +643,138 @@ Figure 3.1: Image of the inline code for data description
 ##  $ Lower bound of the annual temperature anomaly (95% confidence interval): num [1:2] -0.589 -0.412</code></pre>
 <p>The above information shows that the variable Entity is a character variable meanwhile the remaining four variables are all numeric.</p>
 </div>
-<div id="references" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> References</h1>
-<p>Ritchie, H., Roser, M., &amp; Rosado, P. (2020, May 11). CO₂ and greenhouse gas emissions. Our World in Data. <a href="https://ourworldindata.org/co2-and-greenhouse-gas-emissions" class="uri">https://ourworldindata.org/co2-and-greenhouse-gas-emissions</a></p>
+<div id="data-summary" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Data Summary</h1>
+<pre class="r"><code>measure_mean&lt;-temperature_anomaly %&gt;%
+  select(-Year) %&gt;%
+  group_by(Entity) %&gt;%
+  summarise_all(mean)
+
+colnames(measure_mean)&lt;-c(&quot;Entity&quot;,&quot;Mean Global Average Temperature&quot;,&quot;Mean Upper Bound Average Temperature&quot;, &quot;Mean Lower Bound Average Temperature&quot;)
+
+
+measure_median&lt;-temperature_anomaly %&gt;%
+  select(-Year) %&gt;%
+  group_by(Entity) %&gt;%
+  summarise_all(median)
+
+colnames(measure_median)&lt;-c(&quot;Entity&quot;,&quot;Median Global Average Temperature&quot;,&quot;Median Upper Bound Average Temperature&quot;, &quot;Median Lower Bound Average Temperature&quot;)
+
+measures &lt;- merge(measure_mean, measure_median) %&gt;%
+  select(1,2,5,3,6,4,7)
+
+
+kable(measures ,caption = &quot;Mean and Median for Global Average Temperatures including the Upper and Lower Bounds&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&#39;bordered&#39;,&quot;hover&quot;)) %&gt;%
+  column_spec(2:3,background = &#39;#cbcbcb&#39;) %&gt;%
+  column_spec(6:7,background = &#39;#cbcbcb&#39;) </code></pre>
+<table class="table table-bordered table-hover" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-4">Table 4.1: </span>Mean and Median for Global Average Temperatures including the Upper and Lower Bounds
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Entity
+</th>
+<th style="text-align:right;">
+Mean Global Average Temperature
+</th>
+<th style="text-align:right;">
+Median Global Average Temperature
+</th>
+<th style="text-align:right;">
+Mean Upper Bound Average Temperature
+</th>
+<th style="text-align:right;">
+Median Upper Bound Average Temperature
+</th>
+<th style="text-align:right;">
+Mean Lower Bound Average Temperature
+</th>
+<th style="text-align:right;">
+Median Lower Bound Average Temperature
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Global
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.0727916
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.1755711
+</td>
+<td style="text-align:right;">
+0.0250166
+</td>
+<td style="text-align:right;">
+-0.0746874
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.1705997
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.2613263
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern hemisphere
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.0206968
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.1166910
+</td>
+<td style="text-align:right;">
+0.0861322
+</td>
+<td style="text-align:right;">
+-0.0207820
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.1275258
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.2023924
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Southern hemisphere
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.1248863
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.2289955
+</td>
+<td style="text-align:right;">
+0.0055675
+</td>
+<td style="text-align:right;">
+-0.0867496
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.2553402
+</td>
+<td style="text-align:right;background-color: #cbcbcb !important;">
+-0.3925451
+</td>
+</tr>
+</tbody>
+</table>
+<p>Table 4.1 shows the <strong>mean</strong> and <strong>median</strong> global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the <strong>mean</strong> temperatures are slightly higher than the <strong>median</strong> and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.</p>
+</div>
+<div id="references" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> References</h1>
+<p>Ritchie, H., Roser, M., &amp; Rosado, P. (2020, May 11). CO₂ and greenhouse gas emissions. Our World in Data. <a href="https://ourworldindata.org/co2-and-greenhouse-gas-emissions" class="uri">https://ourworldindata.org/co2-and-greenhouse-gas-emissions</a>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; DataAnalysis</p>
 </div>
 
 

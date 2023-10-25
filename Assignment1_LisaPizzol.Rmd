@@ -20,9 +20,6 @@ temperature_anomaly <- read_csv("Data/temperature-anomaly.csv")
 ```
 
 
-
-
-
 # Research question 
 This assignment will explore the question: 
 
@@ -59,7 +56,37 @@ str(head(temperature_anomaly,2))
 
 The above information shows that the variable Entity is a character variable meanwhile the remaining four variables are all numeric. 
 
+# Data Summary
 
+```{r}
+measure_mean<-temperature_anomaly %>%
+  select(-Year) %>%
+  group_by(Entity) %>%
+  summarise_all(mean)
+
+colnames(measure_mean)<-c("Entity","Mean Global Average Temperature","Mean Upper Bound Average Temperature", "Mean Lower Bound Average Temperature")
+
+
+measure_median<-temperature_anomaly %>%
+  select(-Year) %>%
+  group_by(Entity) %>%
+  summarise_all(median)
+
+colnames(measure_median)<-c("Entity","Median Global Average Temperature","Median Upper Bound Average Temperature", "Median Lower Bound Average Temperature")
+
+measures <- merge(measure_mean, measure_median) %>%
+  select(1,2,5,3,6,4,7)
+
+
+kable(measures ,caption = "Mean and Median for Global Average Temperatures including the Upper and Lower Bounds.") %>%
+  kable_styling(bootstrap_options = c('bordered',"hover")) %>%
+  column_spec(2:3,background = '#cbcbcb') %>%
+  column_spec(6:7,background = '#cbcbcb') 
+
+
+
+```
+Table 4.1 shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.  
 
 
 # References
