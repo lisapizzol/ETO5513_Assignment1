@@ -31,8 +31,8 @@ It will specifically look at data for global average temperatures relative to th
 # Data set Introduction {#refsection}
 The data used in this assignment is from Ritchie etal., 2020, and can be found at [Our World in Data](https://ourworldindata.org/co2-and-greenhouse-gas-emissions). It contains global average temperatures relative to the average temperature for the time period between 1961 and 1990, for the Entire Globe; the Southern Hemisphere; and the Northern Hemisphere, from 1850 to 2023. 
 
-The variables contained in this data set are shown below in Table 2.1 - Variable Names. The variable Entity contains categorical information of either Global, Northern Hemisphere or Southern Hemisphere, meanwhile the variable year contains values from 1850 to 2023. All other variables are described in Table 2.1. 
-```{r}
+The variables contained in this data set are shown below in Table \@ref(tab:data) - Variable Names. The variable Entity contains categorical information of either Global, Northern Hemisphere or Southern Hemisphere, meanwhile the variable year contains values from 1850 to 2023. All other variables are described in Table \@ref(tab:data). 
+```{r data, echo=TRUE, message=FALSE, warning=FALSE}
 # table of variable names
 kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names') %>%
   kable_styling()
@@ -40,16 +40,16 @@ kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names'
 
 # Data set description
 The data set contains `r ncol(temperature_anomaly)` variables as outlined in Section \@ref(refsection) - Data set Introduction above and `r nrow(temperature_anomaly)` observations.
-The inline code for the previous sentence can be seen below in Figure 3.1.
+The inline code for the previous sentence can be seen below in Figure \@ref(fig:data2).
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Image of the inline code for data description"}
+```{r data2, echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Image of the inline code for data description"}
 # show image of inline code
 include_graphics("Image/Description_size_of_data.png")
 ```
 
 The variable types for the first two observations in the data set are displayed below.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Variable types for the first two observations in the data set"}
+```{r data3, echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Variable types for the first two observations in the data set"}
 str(head(temperature_anomaly,2))
 
 ```
@@ -58,7 +58,7 @@ The above information shows that the variable Entity is a character variable mea
 
 # Data Summary
 
-```{r}
+```{r data4, message=FALSE, warning=FALSE}
 measure_mean<-temperature_anomaly %>%
   select(-Year) %>%
   group_by(Entity) %>%
@@ -86,9 +86,9 @@ kable(measures ,caption = "Mean and Median for Global Average Temperatures inclu
 
 
 ```
-Table 4.1 shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.  
+Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.  
 
 
 # References
 Ritchie, H., Roser, M., &amp; Rosado, P. (2020, May 11). CO₂ and greenhouse gas emissions. Our World in Data. https://ourworldindata.org/co2-and-greenhouse-gas-emissions 
->>>>>>> DataAnalysis
+
