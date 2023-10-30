@@ -13,6 +13,7 @@ library(knitr)
 library(tidyverse)
 library(readr)
 library(kableExtra)
+library(plotly)
 
 # read in data 
 temperature_anomaly <- read_csv("Data/temperature-anomaly.csv")
@@ -87,6 +88,25 @@ kable(measures ,caption = "Mean and Median for Global Average Temperatures inclu
 
 ```
 Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.  
+
+# Visualisations
+Below in Figure \@ref(fig:data5) are graphs of average temperatures with their Upper and Lower values from 1850 until 2023, for the entire Globe;the Northern Hemisphere and the Southern Hemisphere.
+
+```{r data5, message=FALSE, warning=FALSE, dpi = 150, fig.cap ="Average Temperature Anomly relative to average temperature between 1961 -1990' from 1850 to 2023"}
+colnames(temperature_anomaly)[3]="Global Average Temperature"
+colnames(temperature_anomaly)[4]="Lower Bound"
+colnames(temperature_anomaly)[5]="Upper Bound"
+temp<-temperature_anomaly %>% pivot_longer(cols = 3:5, names_to = "Type", values_to = "number")
+p<-ggplot(temp,aes(x=Year, y=number, color =Type))+geom_point()+geom_line()+
+  scale_colour_manual(values = c("#2375b3","grey","grey"))+
+  theme(axis.line = element_line(linetype = 'solid'))+
+  labs(y="Average Temperature Anomaly relative to average temperature between 1961 - 1990")+
+  geom_hline(yintercept = 0, color = 'grey')+
+  facet_grid(Entity~.)
+p<-ggplotly(p) %>%
+  layout(legend=list(orientation='h'))
+p
+```
 
 
 # References
