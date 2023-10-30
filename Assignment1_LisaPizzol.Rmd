@@ -112,6 +112,14 @@ Figure \@ref(fig:data5) shows the following key observations in relation to the 
 * *Average temperatures have increased since 1850 to 2023 from around -0.4 to 0.8. Making an increase of close to 1.2 degrees in this time frame.*
 * *An increase in the Northern Hemisphere of 1.6 is from -0.4 in 1850 to 1.2 in 2023. Meanwhile, in the Southern Hemisphere an increase of 1.1 is from -0.4 in 1850 to 0.7 in 2023. Indicating the global temperature changed has increased more in the Northern Hemisphere than in the Southern Hemisphere.*
 
+
+# Conclusion
+From the analysis completed in this task the following conclusions can be made when answering the question: **How have global average temperatures changed overtime?**.
+Table \@ref(tab:data4 indicates that the Northern Hemisphere has slightly warmer global average temperatures when compared to the Southern Hemisphere. This was further supported by the data in Figure \@ref(fig:data5), where it was seen the Northern Hemisphere had an increase of 1.6 degrees while the Southern Hemisphere had an increase of 1.1 degrees over the time period from 1850 to 2023. Figure \@ref(fig:data5), also showed that the average global temperatures have increased by 1.2 degrees in the time period from 1850 to 2023. 
+
+In summary, the global average temperatures are increasing with this increase worse in the Northern Hemisphere. 
+
+
 # References
 Ritchie, H., Roser, M., &amp; Rosado, P. (2020, May 11). CO₂ and greenhouse gas emissions. Our World in Data. https://ourworldindata.org/co2-and-greenhouse-gas-emissions 
 
