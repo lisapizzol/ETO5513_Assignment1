@@ -1,6 +1,7 @@
 ---
 title: "Assignment 1 - Project Proposal"
 author: "Lisa Pizzol"
+date: "`r Sys.Date()`"
 output:
   bookdown::html_document2
 ---
@@ -39,7 +40,7 @@ kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names'
   kable_styling()
 ```
 
-# Data set description
+# Data set Description
 The data set contains `r ncol(temperature_anomaly)` variables as outlined in Section \@ref(refsection) - Data set Introduction above and `r nrow(temperature_anomaly)` observations.
 The inline code for the previous sentence can be seen below in Figure \@ref(fig:data2).
 
@@ -60,50 +61,56 @@ The above information shows that the variable Entity is a character variable mea
 # Data Summary
 
 ```{r data4, message=FALSE, warning=FALSE}
+# create data set for mean values
 measure_mean<-temperature_anomaly %>%
   select(-Year) %>%
   group_by(Entity) %>%
   summarise_all(mean)
-
+# change column names for mean values
 colnames(measure_mean)<-c("Entity","Mean Global Average Temperature","Mean Upper Bound Average Temperature", "Mean Lower Bound Average Temperature")
-
-
+# create data set for median values
 measure_median<-temperature_anomaly %>%
   select(-Year) %>%
   group_by(Entity) %>%
   summarise_all(median)
-
+# change column names for mean values
 colnames(measure_median)<-c("Entity","Median Global Average Temperature","Median Upper Bound Average Temperature", "Median Lower Bound Average Temperature")
-
+# merge mean and median data and reorder data set for easier comparison
 measures <- merge(measure_mean, measure_median) %>%
   select(1,2,5,3,6,4,7)
-
-
+# create table of mean and median data
 kable(measures ,caption = "Mean and Median for Global Average Temperatures including the Upper and Lower Bounds.") %>%
   kable_styling(bootstrap_options = c('bordered',"hover")) %>%
   column_spec(2:3,background = '#cbcbcb') %>%
   column_spec(6:7,background = '#cbcbcb') 
-
-
-
 ```
-Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.  
+Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.
 
 # Visualisations
 Below in Figure \@ref(fig:data5) are graphs of the average temperatures with their Upper and Lower values from 1850 until 2023, for the entire Globe; the Northern Hemisphere and the Southern Hemisphere.
 
-```{r data5, message=FALSE, warning=FALSE, dpi = 150, fig.cap ="Average Temperature Anomly relative to average temperature between 1961 -1990' from 1850 to 2023"}
+```{r data5, message=FALSE, warning=FALSE, dpi = 150, fig.cap ="Average Temperature Anomaly relative to average temperature between 1961 -1990' from 1850 to 2023"}
+# change column names for ease of use
 colnames(temperature_anomaly)[3]="Global Average Temperature"
 colnames(temperature_anomaly)[4]="Lower Bound"
 colnames(temperature_anomaly)[5]="Upper Bound"
+# pivot data long for graphing
 temp<-temperature_anomaly %>% pivot_longer(cols = 3:5, names_to = "Type", values_to = "number")
+# graph a scatter line graph
 p<-ggplot(temp,aes(x=Year, y=number, color =Type))+geom_point()+geom_line()+
+  # change colours
   scale_colour_manual(values = c("#2375b3","grey","grey"))+
+  # show axis line clearly
   theme(axis.line = element_line(linetype = 'solid'))+
+  # change y-axis label
   labs(y="Average Temperature Anomaly relative to average temperature between 1961 - 1990")+
+  # add 0 line to compare relative values
   geom_hline(yintercept = 0, color = 'grey')+
+  # create separate graphs for global, southern, northern hemispheres
   facet_grid(Entity~.)
+# add hover over for further information
 p<-ggplotly(p) %>%
+  # change position of legend
   layout(legend=list(orientation='h'))
 p
 ```
@@ -115,7 +122,7 @@ Figure \@ref(fig:data5) shows the following key observations in relation to the 
 
 # Conclusion
 From the analysis completed in this task the following conclusions can be made when answering the question: **How have global average temperatures changed overtime?**.
-Table \@ref(tab:data4 indicates that the Northern Hemisphere has slightly warmer global average temperatures when compared to the Southern Hemisphere. This was further supported by the data in Figure \@ref(fig:data5), where it was seen the Northern Hemisphere had an increase of 1.6 degrees while the Southern Hemisphere had an increase of 1.1 degrees over the time period from 1850 to 2023. Figure \@ref(fig:data5), also showed that the average global temperatures have increased by 1.2 degrees in the time period from 1850 to 2023. 
+Table \@ref(tab:data4) indicates that the Northern Hemisphere has slightly warmer global average temperatures when compared to the Southern Hemisphere. This was further supported by the data in Figure \@ref(fig:data5), where it was seen the Northern Hemisphere had an increase of 1.6 degrees while the Southern Hemisphere had an increase of 1.1 degrees over the time period from 1850 to 2023. Figure \@ref(fig:data5), also showed that the average global temperatures have increased by 1.2 degrees in the time period from 1850 to 2023. 
 
 In summary, the global average temperatures are increasing with this increase worse in the Northern Hemisphere. 
 
