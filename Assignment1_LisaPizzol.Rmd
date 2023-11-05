@@ -44,14 +44,14 @@ kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names'
 The data set contains `r ncol(temperature_anomaly)` variables as outlined in Section \@ref(refsection) - Data set Introduction above and `r nrow(temperature_anomaly)` observations.
 The inline code for the previous sentence can be seen below in Figure \@ref(fig:data2).
 
-```{r data2, echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Image of the inline code for data description"}
+```{r data2, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
 # show image of inline code
 include_graphics("Image/Description_size_of_data.png")
 ```
 
 The variable types for the first two observations in the data set are displayed below.
 
-```{r data3, echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Variable types for the first two observations in the data set"}
+```{r data3, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
 str(head(temperature_anomaly,2))
 
 ```
@@ -60,7 +60,7 @@ The above information shows that the variable Entity is a character variable mea
 
 # Data Summary
 
-```{r data4, message=FALSE, warning=FALSE}
+```{r data4, echo=TRUE, message=FALSE, warning=FALSE}
 # create data set for mean values
 measure_mean<-temperature_anomaly %>%
   select(-Year) %>%
@@ -86,10 +86,15 @@ kable(measures ,caption = "Mean and Median for Global Average Temperatures inclu
 ```
 Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.
 
+```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
+
+```
+
+
 # Visualisations
 Below in Figure \@ref(fig:data5) are graphs of the average temperatures with their Upper and Lower values from 1850 until 2023, for the entire Globe; the Northern Hemisphere and the Southern Hemisphere.
 
-```{r data5, message=FALSE, warning=FALSE, dpi = 150, fig.cap ="Average Temperature Anomaly relative to average temperature between 1961 -1990' from 1850 to 2023"}
+```{r data5, echo=TRUE, fig.cap="Average, message=FALSE, warning=FALSE, dpi=150}
 # change column names for ease of use
 colnames(temperature_anomaly)[3]="Global Average Temperature"
 colnames(temperature_anomaly)[4]="Lower Bound"
