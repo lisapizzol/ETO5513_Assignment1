@@ -44,14 +44,22 @@ kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names'
 The data set contains `r ncol(temperature_anomaly)` variables as outlined in Section \@ref(refsection) - Data set Introduction above and `r nrow(temperature_anomaly)` observations.
 The inline code for the previous sentence can be seen below in Figure \@ref(fig:data2).
 
+<<<<<<< HEAD
 ```{r data2, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
+=======
+```{r data2, echo=TRUE, fig.cap="Image of the inline code for data description", message=FALSE, warning=FALSE}
+>>>>>>> expanded-report
 # show image of inline code
 include_graphics("Image/Description_size_of_data.png")
 ```
 
 The variable types for the first two observations in the data set are displayed below.
 
+<<<<<<< HEAD
 ```{r data3, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
+=======
+```{r data3, echo=TRUE, fig.cap="Variable types for the first two observations in the data set", message=FALSE, warning=FALSE}
+>>>>>>> expanded-report
 str(head(temperature_anomaly,2))
 
 ```
@@ -86,15 +94,45 @@ kable(measures ,caption = "Mean and Median for Global Average Temperatures inclu
 ```
 Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.
 
+<<<<<<< HEAD
 ```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
 
 ```
 
+=======
+Table \@ref(tab:data6), below, shows the five figure summary values for the Globe, the Northern Hemisphere and the Southern Hemisphere.
+
+```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
+# collect only global Average Temperature and entity
+five_figure_summary<-temperature_anomaly %>%
+  select(1:3) 
+colnames(five_figure_summary)[3]="Global_Average_Temperature"
+# create five-figure summary information
+table_five_figure <- five_figure_summary %>%
+  group_by(Entity) %>%
+  summarise(Minimum = min(Global_Average_Temperature), Q1 = quantile(Global_Average_Temperature,0.25),Median = median(Global_Average_Temperature),Q3 = quantile(Global_Average_Temperature,0.75),Maximum = max(Global_Average_Temperature))
+# create table of five figure summary
+kable(table_five_figure ,caption = "Five Figure Summary of the Global Average Temperatures Relative to the average temperture for the period between 1961 and 1990") %>%
+  kable_styling(bootstrap_options = c('bordered',"hover"))
+
+```
+
+From table \@ref(tab:data6), the Northern Hemisphere has warmer temperatures except for the following:
+
+- the minimum value where the Southern Hemisphere has a relative temperature of -0.6252645 and the Northern Hemisphere has a relative temperature of -0.7015686.
+- Quartile 3 (Q3) where the Southern Hemisphere has a relative temperature of 0.12681277 and the Northern Hemisphere has a relative temperature of 0.11944022.
+
+To see these values in a graphical version see Figure \@ref(fig:data7).
+>>>>>>> expanded-report
 
 # Visualisations
 Below in Figure \@ref(fig:data5) are graphs of the average temperatures with their Upper and Lower values from 1850 until 2023, for the entire Globe; the Northern Hemisphere and the Southern Hemisphere.
 
+<<<<<<< HEAD
 ```{r data5, echo=TRUE, fig.cap="Average, message=FALSE, warning=FALSE, dpi=150}
+=======
+```{r data5, echo=TRUE, fig.cap="Average Temperature Anomaly relative to average temperature between 1961 -1990' from 1850 to 2023", message=FALSE, warning=FALSE, dpi=150}
+>>>>>>> expanded-report
 # change column names for ease of use
 colnames(temperature_anomaly)[3]="Global Average Temperature"
 colnames(temperature_anomaly)[4]="Lower Bound"
@@ -124,10 +162,21 @@ Figure \@ref(fig:data5) shows the following key observations in relation to the 
 * *Average temperatures have increased since 1850 to 2023 from around -0.4 to 0.8. Making an increase of close to 1.2 degrees in this time frame.*
 * *An increase in the Northern Hemisphere of 1.6 is from -0.4 in 1850 to 1.2 in 2023. Meanwhile, in the Southern Hemisphere an increase of 1.1 is from -0.4 in 1850 to 0.7 in 2023. Indicating the global temperature changed has increased more in the Northern Hemisphere than in the Southern Hemisphere.*
 
+Figure \@ref(fig:data7), below, shows the Box plots of the Global Average Temperatures Relative to the average temperature for the period between 1961 and 1990, for the entire globe, the Northern Hemisphere and the Southern Hemisphere.
+
+```{r data7, echo=TRUE, message=FALSE, warning=FALSE, fig.cap= 'Boxplots of Global Average Temperatures Relative to the average temperture for the period between 1961 and 1990' }
+p2 <- ggplot(five_figure_summary,aes(x=Entity, y= Global_Average_Temperature, fill = Entity))+geom_boxplot()+
+  theme(axis.title.x=element_blank(), legend.position = "none")
+p2ly <- ggplotly(p2)
+p2ly
+```
+
+Figure \@ref(fig:data7) indicates that seven outliers are present for the Global data, eight outliers are present in the Northern Hemisphere data and no outliers are present in the Southern Hemisphere. This indicates that the temperature means and medians observed in table \@ref(tab:data4) for the Global and Northern Hemisphere data may be impacted by these outliers. Caution should be considered when stating increases in global temperatures as a result. 
+
 
 # Conclusion
 From the analysis completed in this task the following conclusions can be made when answering the question: **How have global average temperatures changed overtime?**.
-Table \@ref(tab:data4) indicates that the Northern Hemisphere has slightly warmer global average temperatures when compared to the Southern Hemisphere. This was further supported by the data in Figure \@ref(fig:data5), where it was seen the Northern Hemisphere had an increase of 1.6 degrees while the Southern Hemisphere had an increase of 1.1 degrees over the time period from 1850 to 2023. Figure \@ref(fig:data5), also showed that the average global temperatures have increased by 1.2 degrees in the time period from 1850 to 2023. 
+Table \@ref(tab:data4) indicates that the Northern Hemisphere has slightly warmer global average temperatures when compared to the Southern Hemisphere. This was further supported by the data in Figure \@ref(fig:data5), where it was seen the Northern Hemisphere had an increase of 1.6 degrees while the Southern Hemisphere had an increase of 1.1 degrees over the time period from 1850 to 2023. Figure \@ref(fig:data5), also showed that the average global temperatures have increased by 1.2 degrees in the time period from 1850 to 2023. Some caution should be taking when making these conclusions. as Table \@ref(tab:data6) and Figure \@ref(fig:data7) also show the same pattern, however, outliers are present in the Global and Northern Hemisphere temperatures.
 
 In summary, the global average temperatures are increasing with this increase worse in the Northern Hemisphere. 
 
