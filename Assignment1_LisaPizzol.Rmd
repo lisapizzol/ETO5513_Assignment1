@@ -31,7 +31,7 @@ This assignment will explore the question:
 It will specifically look at data for global average temperatures relative to the average temperature for the period between 1961 and 1990. 
 
 # Data set Introduction {#refsection}
-The data used in this assignment is from Ritchie etal., 2020, and can be found at [Our World in Data](https://ourworldindata.org/co2-and-greenhouse-gas-emissions). It contains global average temperatures relative to the average temperature for the time period between 1961 and 1990, for the Entire Globe; the Southern Hemisphere; and the Northern Hemisphere, from 1850 to 2023. 
+The data used in this assignment is from Ritchie et al., 2020, and can be found at [Our World in Data](https://ourworldindata.org/co2-and-greenhouse-gas-emissions). It contains global average temperatures relative to the average temperature for the time period between 1961 and 1990, for the Entire Globe; the Southern Hemisphere; and the Northern Hemisphere, from 1850 to 2023. 
 
 The variables contained in this data set are shown below in Table \@ref(tab:data) - Variable Names. The variable Entity contains categorical information of either Global, Northern Hemisphere or Southern Hemisphere, meanwhile the variable year contains values from 1850 to 2023. All other variables are described in Table \@ref(tab:data). 
 ```{r data, echo=TRUE, message=FALSE, warning=FALSE}
@@ -44,11 +44,8 @@ kable(names(temperature_anomaly),caption = "Variable Names", col.names = 'Names'
 The data set contains `r ncol(temperature_anomaly)` variables as outlined in Section \@ref(refsection) - Data set Introduction above and `r nrow(temperature_anomaly)` observations.
 The inline code for the previous sentence can be seen below in Figure \@ref(fig:data2).
 
-<<<<<<< HEAD
-```{r data2, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
-=======
+
 ```{r data2, echo=TRUE, fig.cap="Image of the inline code for data description", message=FALSE, warning=FALSE}
->>>>>>> expanded-report
 # show image of inline code
 include_graphics("Image/Description_size_of_data.png")
 ```
@@ -56,10 +53,8 @@ include_graphics("Image/Description_size_of_data.png")
 The variable types for the first two observations in the data set are displayed below.
 
 <<<<<<< HEAD
-```{r data3, echo=TRUE, fig.cap=, message=FALSE, warning=FALSE}
-=======
+
 ```{r data3, echo=TRUE, fig.cap="Variable types for the first two observations in the data set", message=FALSE, warning=FALSE}
->>>>>>> expanded-report
 str(head(temperature_anomaly,2))
 
 ```
@@ -94,13 +89,8 @@ kable(measures ,caption = "Mean and Median for Global Average Temperatures inclu
 ```
 Table \@ref(tab:data4) shows the **mean** and **median** global average temperatures including the upper and lower bound temperature values. The values in this table indicate that the **mean** temperatures are slightly higher than the **median** and the Northern Hemisphere is slightly warmer than the Southern Hemisphere.
 
-<<<<<<< HEAD
-```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
 
-```
-
-=======
-Table \@ref(tab:data6), below, shows the five figure summary values for the Globe, the Northern Hemisphere and the Southern Hemisphere.
+Table \@ref(tab:data6), below, shows the five figure summary values for the Globe, the Northern Hemisphere, and the Southern Hemisphere.
 
 ```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
 # collect only global Average Temperature and entity
@@ -112,7 +102,7 @@ table_five_figure <- five_figure_summary %>%
   group_by(Entity) %>%
   summarise(Minimum = min(Global_Average_Temperature), Q1 = quantile(Global_Average_Temperature,0.25),Median = median(Global_Average_Temperature),Q3 = quantile(Global_Average_Temperature,0.75),Maximum = max(Global_Average_Temperature))
 # create table of five figure summary
-kable(table_five_figure ,caption = "Five Figure Summary of the Global Average Temperatures Relative to the average temperture for the period between 1961 and 1990") %>%
+kable(table_five_figure ,caption = "Five Figure Summary of the Global Average Temperatures Relative to the average temperature for the period between 1961 and 1990") %>%
   kable_styling(bootstrap_options = c('bordered',"hover"))
 
 ```
@@ -123,16 +113,11 @@ From table \@ref(tab:data6), the Northern Hemisphere has warmer temperatures exc
 - Quartile 3 (Q3) where the Southern Hemisphere has a relative temperature of 0.12681277 and the Northern Hemisphere has a relative temperature of 0.11944022.
 
 To see these values in a graphical version see Figure \@ref(fig:data7).
->>>>>>> expanded-report
 
 # Visualisations
 Below in Figure \@ref(fig:data5) are graphs of the average temperatures with their Upper and Lower values from 1850 until 2023, for the entire Globe; the Northern Hemisphere and the Southern Hemisphere.
 
-<<<<<<< HEAD
-```{r data5, echo=TRUE, fig.cap="Average, message=FALSE, warning=FALSE, dpi=150}
-=======
 ```{r data5, echo=TRUE, fig.cap="Average Temperature Anomaly relative to average temperature between 1961 -1990' from 1850 to 2023", message=FALSE, warning=FALSE, dpi=150}
->>>>>>> expanded-report
 # change column names for ease of use
 colnames(temperature_anomaly)[3]="Global Average Temperature"
 colnames(temperature_anomaly)[4]="Lower Bound"
@@ -162,11 +147,13 @@ Figure \@ref(fig:data5) shows the following key observations in relation to the 
 * *Average temperatures have increased since 1850 to 2023 from around -0.4 to 0.8. Making an increase of close to 1.2 degrees in this time frame.*
 * *An increase in the Northern Hemisphere of 1.6 is from -0.4 in 1850 to 1.2 in 2023. Meanwhile, in the Southern Hemisphere an increase of 1.1 is from -0.4 in 1850 to 0.7 in 2023. Indicating the global temperature changed has increased more in the Northern Hemisphere than in the Southern Hemisphere.*
 
-Figure \@ref(fig:data7), below, shows the Box plots of the Global Average Temperatures Relative to the average temperature for the period between 1961 and 1990, for the entire globe, the Northern Hemisphere and the Southern Hemisphere.
+Figure \@ref(fig:data7), below, shows the Box plots of the Global Average Temperatures Relative to the average temperature for the period between 1961 and 1990, for the entire globe, the Northern Hemisphere, and the Southern Hemisphere.
 
-```{r data7, echo=TRUE, message=FALSE, warning=FALSE, fig.cap= 'Boxplots of Global Average Temperatures Relative to the average temperture for the period between 1961 and 1990' }
+```{r data7, echo=TRUE, message=FALSE, warning=FALSE, fig.cap= 'Boxplots of Global Average Temperatures Relative to the average temperature for the period between 1961 and 1990' }
+# create box plots
 p2 <- ggplot(five_figure_summary,aes(x=Entity, y= Global_Average_Temperature, fill = Entity))+geom_boxplot()+
   theme(axis.title.x=element_blank(), legend.position = "none")
+# add hover interaction
 p2ly <- ggplotly(p2)
 p2ly
 ```
