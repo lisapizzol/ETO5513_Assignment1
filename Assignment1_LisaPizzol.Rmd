@@ -91,8 +91,8 @@ Table \@ref(tab:data6), below, shows the five figure summary values for the Glob
 ```{r data6, echo=TRUE, message=FALSE, warning=FALSE}
 # collect only global Average Temperature and entity
 five_figure_summary<-temperature_anomaly %>%
-  select(1,3) 
-colnames(five_figure_summary)[2]="Global_Average_Temperature"
+  select(1:3) 
+colnames(five_figure_summary)[3]="Global_Average_Temperature"
 # create five-figure summary information
 table_five_figure <- five_figure_summary %>%
   group_by(Entity) %>%
@@ -143,8 +143,11 @@ Figure \@ref(fig:data5) shows the following key observations in relation to the 
 * *Average temperatures have increased since 1850 to 2023 from around -0.4 to 0.8. Making an increase of close to 1.2 degrees in this time frame.*
 * *An increase in the Northern Hemisphere of 1.6 is from -0.4 in 1850 to 1.2 in 2023. Meanwhile, in the Southern Hemisphere an increase of 1.1 is from -0.4 in 1850 to 0.7 in 2023. Indicating the global temperature changed has increased more in the Northern Hemisphere than in the Southern Hemisphere.*
 
-```{r data7}
-
+```{r data7, echo=TRUE, message=FALSE, warning=FALSE, fig.cap= 'Boxplots of Global Average Temperatures Relative to the average temperture for the period between 1961 and 1990' }
+p2 <- ggplot(five_figure_summary,aes(x=Entity, y= Global_Average_Temperature, fill = Entity))+geom_boxplot()+
+  theme(axis.title.x=element_blank(), legend.position = "none")
+p2ly <- ggplotly(p2)
+p2ly
 ```
 
 # Conclusion
